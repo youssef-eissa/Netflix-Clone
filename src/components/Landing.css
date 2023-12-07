@@ -1,0 +1,59 @@
+body {
+    background-color: rgb(0 0 0 / 90%) !important;
+
+}
+.headerSection{
+    height: 800px;
+}
+
+.logo img{
+    width: 150px;
+    height: 100px;
+}
+.headerSection .overlay{
+    background-image: linear-gradient(to bottom,rgba(0, 0, 0, 0.8) 0,
+        rgba(0, 0, 0, 0.8) 60%,
+        rgba(0, 0, 0, 1) 100%); 
+        
+}
+.homeSubscription {
+    color: white;
+    position: absolute;
+    bottom:200px;
+    left: 20px;
+    z-index: 5;
+    width: 50%;
+    
+}
+.homeSubscription h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600 ;
+    font-size: 56px;
+}
+.homeSubscription span {
+    font-family: 'Poppins', sans-serif;
+}
+.homeSubscription span:nth-child(2) {
+    font-weight: 600;
+}
+.homeSubscription span:nth-child(3){
+    color: rgba(255, 255, 255, 0.7);
+}
+.homeSubscription form input{
+    border: none;
+}
+.homeSubscription form input:focus {
+    outline: none;
+}
+.collapseRow {
+    background-color: gray;
+    transition: 0.3s;
+    
+}
+.collapseRow:hover{
+background-color: rgb(171, 170, 170) !important;
+}
+.landPageLink{
+ color: rgba(255, 255, 255, 0.7);
+ text-align: center;
+}
