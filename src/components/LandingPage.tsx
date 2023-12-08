@@ -12,7 +12,11 @@ import { useFormik } from 'formik'
 import React from 'react'
 import Collapsee from './antd/Collapse'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Overlay } from './StyledComponents/StyledOverlay'
+
 function LandingPage() {
+    const navigate = useNavigate()
     const schema = yup.object().shape({
         email: yup.string().email().required(),
     })
@@ -37,12 +41,12 @@ function LandingPage() {
                     <div className='col-12 position-absolute top-0 start-0 h-100 w-100 z-1'>
                         <img className='w-100 h-100 img-fluid ' src={banner} alt="banner" />
                     </div>
-                    <div className='col-12 position-absolute top-0 start-0 h-100 w-100 overlay z-2'></div>
+                    <Overlay></Overlay>
                     <div className='col-12 d-flex justify-content-between align-items-center'>
                         <div className='col-4 ps-3 logo position-relative z-3'>
                             <img src={logo} alt="logo" className='img-fluid' />
                         </div>
-                        <StyledButton className='col-1 p-1 me-3 z-3'>Sign In</StyledButton>
+                        <StyledButton onClick={() => navigate('/signin')} className='col-1 p-1 me-3 z-3'>Sign In</StyledButton>
                     </div>
                     <div style={{color:'white'}} className='homeSubscription d-flex flex-column'>
                         <h1 className='col-9'>Unlimited movies, TV shows, and more</h1>

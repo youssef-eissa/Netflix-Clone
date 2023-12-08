@@ -1,0 +1,10 @@
+.signin form {
+    background-color: #000000a3;
+    height: 500px;
+}
+.signin form legend {
+    color: white;
+    font-size: 36px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
