@@ -1,0 +1,110 @@
+.slider{
+    color: white;
+    overflow: visible !important;
+    position: relative;
+}
+.slider-button{
+    background-color: #0000005e !important;
+    transition: 0.3s;
+    cursor: pointer !important;
+    position: absolute;
+    height: 100%;
+    width: 90px;
+    z-index: 200;
+}
+.next{
+    right: 0px;
+}
+.left{
+    left: 0;
+}
+.slider-button {
+    background-color: #0000005e !important;
+    transition: 0.3s;
+    cursor: pointer !important;
+    position: absolute;
+    height: 50%;
+    right: 0px;
+    width: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+    
+}
+
+
+.slider-button:hover {
+    background-color: #000000b3 !important;
+}
+.MoviesContainer{
+    top: -200px;
+}
+
+.HomeNavBar{
+    position: fixed;
+    background-color: #141414;
+    z-index: 400;
+}
+.loadMore{
+    height: 400px;
+}
+.ToHoverTheBox{
+    position: relative;
+    transform: rotate(10deg);
+}
+.overview{
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    height: 80px;
+    overflow: auto;
+}
+.overview::-webkit-scrollbar{
+    width: 10px;
+}
+.overview::-webkit-scrollbar-thumb{
+    background-color: red;
+    border-radius: 10px;
+}
+.overview::-webkit-scrollbar-track{
+    background-color: black;
+    box-shadow: inset 0 0 5px grey;
+}
+.MovieBoxTitle{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+.BoxHover {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: 0.3s;
+    background-color: #131311;
+    z-index: -1000;
+}
+.BoxHover .ImgInHoverBox{
+    height: 180px;
+}
+
+
+.MovieCon{
+    height: 420px;
+}
+.modalCon{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1000px;
+    z-index: 20002;
+    background-color: #0000005e;
+   
+}
+.ModalImg{
+    height: 500px;
+}

@@ -46,7 +46,7 @@ function LandingPage() {
                         <div className='col-4 ps-3 logo position-relative z-3'>
                             <img src={logo} alt="logo" className='img-fluid' />
                         </div>
-                        <StyledButton onClick={() => navigate('/signin')} className='col-1 p-1 me-3 z-3'>Sign In</StyledButton>
+                        <StyledButton onClick={() => { navigate('/signin'); window.location.reload()}} className='col-1 p-1 me-3 z-3'>Sign In</StyledButton>
                     </div>
                     <div style={{color:'white'}} className='homeSubscription d-flex flex-column'>
                         <h1 className='col-9'>Unlimited movies, TV shows, and more</h1>

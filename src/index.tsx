@@ -12,6 +12,17 @@ import storage from 'redux-persist/lib/storage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { userReducer } from './components/redux/userSlice';
 import 'react-toastify/dist/ReactToastify.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/effect-fade';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 
 const client = new QueryClient();

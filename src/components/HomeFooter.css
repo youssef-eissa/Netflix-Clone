@@ -1,0 +1,29 @@
+.icon{
+    color: white !important;
+    font-size: 30px !important;
+}
+.footerLinks .link{
+    font-size: 13px !important;
+    color: #808080;
+    text-decoration: none;
+}
+.footerLinks .link:hover{
+    text-decoration: underline;
+}
+
+.serviceCode{
+    color: #808080;
+    border: 1px solid #808080;
+}
+.serviceCode:hover{
+    color: white;
+    cursor: pointer;
+}
+.HomeFooter span{
+    color: #808080;
+    font-size: 11px;
+}
+
+/* .HomeFooter{
+    margin-top: 100px !important;
+} */
