@@ -4,7 +4,6 @@ import axios from "axios"
 import ReactPlayer from "react-player"
 import './HomeVideo.css'
 import { useEffect, useState } from "react"
-import { useInView } from 'react-intersection-observer'
 
 
 type THomeVideo = {
@@ -12,7 +11,6 @@ type THomeVideo = {
     popularMoviesSuccess: boolean
 }
 function HomeVideo({ popularMovies, popularMoviesSuccess }: THomeVideo) {
-const [ref,inView]=useInView()
 const key = 'e5a319653f57fe3b2a8b69afa1a4377f';
 const [video,SetVideo]=useState<number>(0)
 useEffect(() => {
@@ -38,19 +36,18 @@ const { data: movieVideo } = useQuery({
     refetchOnWindowFocus: false
     
 });
-console.log(inView);
 
 
     return (
         <div className="container-fluid ">
             <div className="row">
-                <div ref={ref} className="col-12 video p-0">
+                <div className="col-12 video p-0">
                     <ReactPlayer
                         url={`https://www.youtube.com/watch?v=${movieVideo?.key}`}
                         width="100%"
                         height="100%"
-                        playing={inView}
-                        
+                        playing={true}
+                        muted
                         loop
                         config={{
                             youtube: {

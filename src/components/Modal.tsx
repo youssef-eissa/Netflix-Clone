@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { genre } from './Types/app'
 import ReactPlayer from 'react-player'
+import { SoundOutlined } from '@ant-design/icons'
 
 type TModal = {
     Movie: singleMovie | null
@@ -18,7 +19,9 @@ function Modal({ Movie, showModal, setShowModal }: TModal) {
     const [fetchSeriesGenres, setFetchSeriesGenres] = useState <boolean>(false)
     const [fetchMoviesGenres, setFetchMoviesGenres] = useState<boolean>(false)
     const [checkMovieOrSeries, setCheckMovieOrSeries] = useState<string>('')
-        const [videoID, SetVideID] = useState<number>(0)
+    const [mute,setMute]=useState<boolean>(false)
+    const [VolumeBarMuteDisplay,setVolumeBarMuteDisplay]=useState<string>('d-none')
+    const [videoID, SetVideID] = useState<number>(0)
 
     const [genres,setGenres]=useState<string[]>([])
     const key = 'e5a319653f57fe3b2a8b69afa1a4377f'
@@ -27,12 +30,13 @@ function Modal({ Movie, showModal, setShowModal }: TModal) {
     const { ref, inView } = useInView()
     const {ref:videoModalRef,inView:videoModalInView}=useInView()
     const animate=useAnimation()
-    
+
     const CloseModal = useCallback(() => {
         if (MovieConRef.current) {
-            
             MovieConRef.current.addEventListener('click', (e) => {
-                setShowModal(false)
+                if (e.target === MovieConRef.current) {
+                    setShowModal(false)
+            }
             })
         }
     }, [setShowModal])
@@ -141,8 +145,19 @@ return axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${key}&lang
         refetchOnWindowFocus: false
     });
 
-
-
+const handleMute = useCallback(() => {
+    setMute(!mute)
+    
+    
+}, [mute ])
+    
+    useEffect(() => {
+    if (mute) {
+        setVolumeBarMuteDisplay('d-flex')
+    } else {
+        setVolumeBarMuteDisplay('d-none')
+    }
+},[mute])
     return (
         <div  className='container-fluid'>
             <div  className='row'>
@@ -168,14 +183,22 @@ return axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${key}&lang
                                         </div>
                                     })}
                                 </div>
+                                <div className='col-auto ms-5 d-flex align-items-center '>{Movie?.release_date || Movie?.first_air_date }</div>
                             </div>
                             <div ref={videoModalRef} className='col-6 d-flex modalVideoCon mt-3 rounded overflow-hidden '>
+                                <div onClick={handleMute} className='col-auto d-flex align-items-center justify-content-center VideoModalControlVolume p-2'>
+                                    <SoundOutlined />
+                                    <div  className={`col-auto barVolumeControl ${VolumeBarMuteDisplay}`}>|</div>
+                                </div>
                                 <ReactPlayer
                                     url={`https://www.youtube.com/watch?v=${movieVideo?.key}`}
                                     width='100%'
                                     height='100%'
                                     controls={false}
+                                    loop
                                     playing={videoModalInView}
+                                    muted={mute}
+                                    
                                     config={{
                                         youtube: {
                                             playerVars: {

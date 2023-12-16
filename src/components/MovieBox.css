@@ -152,4 +152,24 @@
 }
 .modalVideoCon{
     height: 250px;
+    position: relative;
+}
+
+.VideoModalControlVolume{
+    border: 1px solid white;
+    height: fit-content;
+    border-radius: 50%;
+    font-size: 20px;
+    position: absolute;
+    right: 10px ;
+    bottom: 30px;
+    cursor: pointer;
+}
+.barVolumeControl{
+    position: absolute;
+    height: fit-content;
+    top: -13px;
+    left: 45%;
+    transform: translateX(-50%) rotate(-35deg);
+    font-size: 35px;
 }

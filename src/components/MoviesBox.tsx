@@ -17,7 +17,7 @@ type TMovieBox={
 }
 function MoviesBox({ movies, title, PopularfetchNextPage,setMovie,setShowModal,showModal }: TMovieBox) {
 
-   
+    
    
     const BoxHover = useRef<any>([])
     const BoxToHover = useRef<any>([])
@@ -79,7 +79,7 @@ function MoviesBox({ movies, title, PopularfetchNextPage,setMovie,setShowModal,s
     
     }, )
     
-
+    
 
 return (
     <div className='container-fluid  '>
