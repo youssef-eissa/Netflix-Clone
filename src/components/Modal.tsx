@@ -147,10 +147,9 @@ return axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${key}&lang
 
 const handleMute = useCallback(() => {
     setMute(!mute)
-    
-    
+
 }, [mute ])
-    
+
     useEffect(() => {
     if (mute) {
         setVolumeBarMuteDisplay('d-flex')

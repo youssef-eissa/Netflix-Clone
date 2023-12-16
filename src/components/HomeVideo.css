@@ -1,3 +1,43 @@
 .video{
     height: 700px;
 }
+.loader{
+    background-color: #000000eb;
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+}
+    .fill{
+    color: white;
+    font-size: 300px;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px white;
+    font-family: 'Poppins';
+    width: fit-content;
+    position: relative;
+    text-align: center;
+}
+    .fill::before{
+    content: "NETFLIX";
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 0;
+    transition: 0.5s;
+    -webkit-text-fill-color: red;
+    overflow: hidden;
+    animation: loading 2s infinite ease alternate ;
+    animation-delay: 0;
+}
+.fill:hover::before{
+    width: 100%;
+}
+@keyframes loading {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 100%;
+    }
+    
+}

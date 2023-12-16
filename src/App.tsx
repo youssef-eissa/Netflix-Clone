@@ -9,6 +9,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPopularMovies, fetchTopRatedMovies, fetchUpcomingMovies,fetchPlayingMovies,fetchPopularSeries,fetchAirSeries,fetchOnTheAirSeries,fetchTopRatedSeries } from "./components/fetches/Movies";
 import { Page } from "./components/Types/app";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import Loader from "./components/Loader";
 type TUser = {
     token: string
     user:any
@@ -61,11 +62,9 @@ function App() {
       },
       staleTime: 0,
     refetchOnWindowFocus: false
-    
-    
     })
   
-  const { data: UpcomingMovies,isSuccess:UpcomingMoviesSuccess,fetchNextPage:fetchUpcomingNextPage } = useInfiniteQuery({
+  const { data: UpcomingMovies,isSuccess:UpcomingMoviesSuccess,fetchNextPage:fetchUpcomingNextPage,isFetching:UpcomingMoviesFetching } = useInfiniteQuery({
     queryKey: ['UpcomingMovies'],
     queryFn: fetchUpcomingMovies,
     getNextPageParam: (lastPage, pages) => {
@@ -82,7 +81,7 @@ function App() {
     
 
   })
-  const { data: PlyingMovies,isSuccess:PlayingMoviesSuccess,fetchNextPage:fetchPlayingNextPage } = useInfiniteQuery({
+  const { data: PlyingMovies,isSuccess:PlayingMoviesSuccess,fetchNextPage:fetchPlayingNextPage ,isFetching:PlayingMoviesFetching} = useInfiniteQuery({
     queryKey: ['PlayingMovies'],
     queryFn: fetchPlayingMovies,
     getNextPageParam: (lastPage, pages) => {
@@ -99,7 +98,7 @@ function App() {
     
 
   })
-  const { data: PopularSeries,fetchNextPage:fetchPopularSeriesNextPage } = useInfiniteQuery({
+  const { data: PopularSeries,fetchNextPage:fetchPopularSeriesNextPage,isFetching:PopularSeriesFetching } = useInfiniteQuery({
     queryKey: ['PopularSeries'],
     queryFn: fetchPopularSeries,
     getNextPageParam: (lastPage, pages) => {
@@ -116,7 +115,7 @@ function App() {
     
 
   })
-  const { data: AirSeries,fetchNextPage:fetchAirSeriesNextPage } = useInfiniteQuery({
+  const { data: AirSeries,fetchNextPage:fetchAirSeriesNextPage,isFetching:AirSeriesFetching } = useInfiniteQuery({
     queryKey: ['AirSeries'],
     queryFn: fetchAirSeries,
     getNextPageParam: (lastPage, pages) => {
@@ -133,7 +132,7 @@ function App() {
     
 
   })
-  const { data: OnTheAirSeries,fetchNextPage:fetchOnTheAirSeriesNextPage } = useInfiniteQuery({
+  const { data: OnTheAirSeries,fetchNextPage:fetchOnTheAirSeriesNextPage,isFetching:OnTheAirSeriesFetching } = useInfiniteQuery({
     queryKey: ['OnTheAirSeries'],
     queryFn: fetchOnTheAirSeries,
     getNextPageParam: (lastPage, pages) => {
@@ -150,7 +149,7 @@ function App() {
     
 
   })
-  const { data: TopRatedSeries,fetchNextPage:fetchTopRatedSeriesNextPage } = useInfiniteQuery({
+  const { data: TopRatedSeries,fetchNextPage:fetchTopRatedSeriesNextPage,isFetching:TopRatedSeriesFetching } = useInfiniteQuery({
     queryKey: ['TopRatedSeries'],
     queryFn: fetchTopRatedSeries,
     getNextPageParam: (lastPage, pages) => {
@@ -167,8 +166,26 @@ function App() {
     
 
   })
+  function Loading() {
+    return (
+      <div>
+        <Loader />
+      </div>
+    )
+  }
+  useEffect(()  =>  {
+    
+  }, [OnTheAirSeriesFetching, TopRatedSeriesFetching, AirSeriesFetching, PopularSeriesFetching, PlayingMoviesFetching, UpcomingMoviesFetching])
+  
 
+if (OnTheAirSeriesFetching||TopRatedSeriesFetching||AirSeriesFetching||PopularSeriesFetching||PlayingMoviesFetching||UpcomingMoviesFetching) {
 
+  return (
+    <div>
+      <Loading />
+    </div>
+  )
+    } 
   return (
     <div>
       <Routes>
@@ -176,7 +193,7 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         {token !== '' && <Route path="/home" element={<Home popularMoviesSuccess={popularMoviesSuccess} PopularfetchNextPage={PopularfetchNextPage} popularMovies={popularMovies as Page[]} TopRatedMovies={TopRatedMovies as Page[]} TopRatedMoviesSuccess={TopRatedMoviesSuccess} fetchTopRatedNextPage={fetchTopRatedNextPage} UpcomingMovies={UpcomingMovies as Page[]} UpcomingMoviesSuccess={UpcomingMoviesSuccess} fetchUpcomingNextPage={fetchUpcomingNextPage} playingMovies={PlyingMovies as Page[]} playingMoviesSuccess={PlayingMoviesSuccess} fetchPlayingNextPage={fetchPlayingNextPage} popularSeries={PopularSeries as Page[]} fetchPopularSeries={fetchPopularSeriesNextPage} AirSeries={AirSeries as Page[] } fetchAirSeries={fetchAirSeriesNextPage} OnTheAirSeries={OnTheAirSeries as Page[]} fetchOnTheAirSeries={fetchOnTheAirSeriesNextPage} TopRatedSeries={TopRatedSeries as Page[]} fetchTopRatedSeries={fetchTopRatedSeriesNextPage} /> } />}
       </Routes>
-      <ReactQueryDevtools position='bottom'  initialIsOpen={false}/>
+      <ReactQueryDevtools position='bottom' initialIsOpen={false} />
     </div>
   );
 }
