@@ -3,10 +3,10 @@ import Slider from "react-slick";
 import { DoubleRightOutlined } from "@ant-design/icons";
 import { DoubleLeftOutlined } from "@ant-design/icons";
 import { StyledButton } from "./StyledComponents/StyledButton";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
+
 import './MovieBox.css'
-import React, { useCallback, useEffect, useRef ,useState} from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 type TMovieBox={
     movies: Page[] 
     title: string
@@ -16,22 +16,9 @@ type TMovieBox={
     showModal: boolean
 }
 function MoviesBox({ movies, title, PopularfetchNextPage,setMovie,setShowModal,showModal }: TMovieBox) {
-    const key = 'e5a319653f57fe3b2a8b69afa1a4377f';
-    const [videoo, SetVideoo] = useState<number>(0)
 
-    const fetchMovieVideo = () => {
-    return axios.get(`https://api.themoviedb.org/3/movie/${videoo}/videos?api_key=${key}`);
-    }
-    const { data: movieVideo } = useQuery({
-        queryKey: ['movieVideoo',videoo],
-        queryFn: fetchMovieVideo,
-        select: (data) => {
-            return data.data.results[0]
-        },
-        enabled: videoo!==0,
-        staleTime: 0,
-        refetchOnWindowFocus: false
-    });
+   
+   
     const BoxHover = useRef<any>([])
     const BoxToHover = useRef<any>([])
     function SliderButton({arrow,onClick,className}:any) {
@@ -72,7 +59,6 @@ function MoviesBox({ movies, title, PopularfetchNextPage,setMovie,setShowModal,s
                                 current[i].style.transform = 'rotate(0deg)'
                             current[i].style.zIndex = '1'
                             current[i].style.transition='0.3s'
-                                SetVideoo(FlattenMoviesArray[i]?.id)
 
                     })
                     e.addEventListener('mouseleave', (e:React.MouseEvent<HTMLDivElement>) => {
@@ -84,7 +70,6 @@ function MoviesBox({ movies, title, PopularfetchNextPage,setMovie,setShowModal,s
                         current[i].style.transform = 'rotate(10deg)'
                         current[i].style.zIndex = '0'
 
-                    SetVideoo(0)
                     })
                 }
            
@@ -111,7 +96,7 @@ return (
                                     <img alt={movie.title} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="img-fluid h-100 w-100" />
                                 </div>
 
-                                <div ref={e => BoxToHover.current[i] = e} className={`BoxHover z-1 rounded d-flex flex-column overflow-hidden  align-items-ceter`}>
+                                <div ref={e => BoxToHover.current[i] = e} className={`BoxHover z-1 rounded d-flex flex-column overflow-hidden  align-items-center`}>
                                     <div className = "col-12 ImgInHoverBox p-0" >
                                             <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="img-fluid h-100 w-100" alt={movie.title}/>
                                     </div>
@@ -119,7 +104,7 @@ return (
                                         <h6 className="col-12 p-0 m-0">{movie.title || movie.name}</h6>
                                     <p className="col-12 p-0 my-2">{movie.release_date || movie.first_air_date}</p>
                                         <p className="overview col-12 p-0 m-0">{movie.overview}</p>
-                                        <StyledButton onClick={()=>getMovie(movie)} className="col-12 p-1 mt-3">Show Movie</StyledButton>
+                                        <StyledButton onClick={()=>getMovie(movie)} className="col-12 p-1 mt-3">Show Info</StyledButton>
                                     </div>
                                 </div>
 

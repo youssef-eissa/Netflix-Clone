@@ -100,11 +100,56 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 1000px;
+    height: 900px;
     z-index: 20002;
     background-color: #0000005e;
    
 }
 .ModalImg{
-    height: 500px;
+    height: 350px;
+    position: relative;
+    overflow: hidden;
+}
+.ModalImgShadow{
+    position: absolute;
+    width: 150%;
+    height: 100%;
+    top: 130%;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    border-radius: 50%;
+    border-top: 2px solid  springgreen;
+    box-shadow: 10px 0 20px 10px springgreen inset;
+    background-color: #0000006b;
+}
+.MovieBoxCon{
+    position: relative;
+    top: 0;
+}
+.ModalTitle{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.MovieInfoModal{
+    background-color: #131313;
+    color: white;
+}
+.MovieInfoModal p{
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+.rate{
+    color: springgreen;
+}
+
+.adult{
+    border: 1px solid gray;
+}
+.modalVideoCon{
+    height: 250px;
 }

@@ -4,13 +4,15 @@ import axios from "axios"
 import ReactPlayer from "react-player"
 import './HomeVideo.css'
 import { useEffect, useState } from "react"
+import { useInView } from 'react-intersection-observer'
+
 
 type THomeVideo = {
     popularMovies: Page[]
     popularMoviesSuccess: boolean
 }
 function HomeVideo({ popularMovies, popularMoviesSuccess }: THomeVideo) {
-
+const [ref,inView]=useInView()
 const key = 'e5a319653f57fe3b2a8b69afa1a4377f';
 const [video,SetVideo]=useState<number>(0)
 useEffect(() => {
@@ -36,18 +38,19 @@ const { data: movieVideo } = useQuery({
     refetchOnWindowFocus: false
     
 });
+console.log(inView);
 
 
     return (
         <div className="container-fluid ">
             <div className="row">
-                <div  className="col-12 video p-0">
+                <div ref={ref} className="col-12 video p-0">
                     <ReactPlayer
                         url={`https://www.youtube.com/watch?v=${movieVideo?.key}`}
                         width="100%"
                         height="100%"
-                        playing={true}
-                        muted
+                        playing={inView}
+                        
                         loop
                         config={{
                             youtube: {
@@ -56,20 +59,11 @@ const { data: movieVideo } = useQuery({
                                     showinfo: 0,
                                     rel: 0,
                                     controls: 0,
-                                    autoplay:1
                                 },
                             },
                         }}
                     />
-                    {/* <iframe
-                        className="col-12"
-                        width="100%"
-                        height="100%"
-                        src={`https://www.youtube.com/embed/${movieVideo?.key}?autoplay=1&mute=1&controls=0&loop=1&rel=0`}
-                        title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        
-                    ></iframe> */}
+                    
                 </div>
             </div>
     </div>

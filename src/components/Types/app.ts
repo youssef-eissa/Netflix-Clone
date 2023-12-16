@@ -52,3 +52,8 @@ export type Page = {
         profile_path?: string;
         origin_country?: string[]
 }[]
+
+export type genre = {
+        id: number;
+        name: string;
+}
