@@ -1,4 +1,4 @@
-import { Page,singleMovie } from "./Types/app"
+import { Page } from "./Types/app"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import ReactPlayer from "react-player"
@@ -26,12 +26,9 @@ useEffect(() => {
     
     useEffect(() => {
         if (Movies && Movies[0][0].original_title) {
-            console.log('yes');
             setSeriesOrMovie('movie')
-            
         } else if(Movies && Movies[0][0].original_name!==undefined){
             setSeriesOrMovie('tv')
-            console.log('no');
 
         }
     }, [Movies])

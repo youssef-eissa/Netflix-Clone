@@ -2,7 +2,6 @@ import HomeVideo from "./HomeVideo"
 import MoviesBox from "./MoviesBox"
 import './MovieBox.css'
 import { Page,singleMovie } from "./Types/app"
-import HomeFooter from "./HomeFooter"
 import Modal from "./Modal"
 
 
@@ -61,7 +60,7 @@ function Home({ popularMovies, popularMoviesSuccess, PopularfetchNextPage, TopRa
                         <MoviesBox Movie={Movie} showModal={showModal} setShowModal={setShowModal} setMovie={setMovie} title="Top Rated Series" movies={TopRatedSeries as Page[]} fetchNextPage={fetchTopRatedSeries} />
 
                     </div>
-                    <Modal showModal={showModal} setShowModal={setShowModal} Movie={Movie}/>
+                    <Modal setMovie={setMovie} showModal={showModal} setShowModal={setShowModal} Movie={Movie}/>
 
                 </div>
             </div>

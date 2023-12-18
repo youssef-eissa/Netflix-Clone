@@ -17,9 +17,7 @@ type TMovieBox = {
 }
 function MoviesBox({ movies, title, fetchNextPage,setMovie,setShowModal,series }: TMovieBox) {
 
-    
-   
-    const BoxHover = useRef<any>([])
+    const BoxHover: React.MutableRefObject<HTMLDivElement[]> = useRef([])
     const BoxToHover = useRef<any>([])
     function SliderButton({arrow,onClick}:any) {
         return <div style={{cursor:'pointer'}} className="d-flex align-items-center justify-content-center" onClick={onClick} >{arrow}</div>
@@ -58,8 +56,8 @@ function MoviesBox({ movies, title, fetchNextPage,setMovie,setShowModal,series }
                                 HoverCurrent[i].style.height = '390px'
                                 HoverCurrent[i].style.transition = '0.3s'
                                 current[i].style.transform = 'rotate(0deg)'
-                            current[i].style.zIndex = '1'
-                            current[i].style.transition='0.3s'
+                                current[i].style.zIndex = '1'
+                                current[i].style.transition='0.3s'
 
                     })
                     e.addEventListener('mouseleave', (e:React.MouseEvent<HTMLDivElement>) => {
@@ -91,7 +89,7 @@ return (
                     <Slider className="slider position-relative d-flex p-0 col-12" {...settings}>
                         {FlattenMoviesArray?.map((movie: singleMovie, i: number) => {
                         return <div className="col-12 d-flex MovieCon justify-content-center align-items-center" key={movie.id}>
-                            <div ref={e => BoxHover.current[i] = e} className="col-11 ToHoverTheBox">
+                            <div ref={e  => BoxHover.current[i]  = e!} className="col-11 ToHoverTheBox">
 
                                 <div className=" col-12 overflow-hidden rounded z-3 imgCon h-100 ">
                                     <img alt={movie.title} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="img-fluid h-100 w-100" />

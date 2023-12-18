@@ -94,7 +94,7 @@ function MoviesPage({ popularMovies, showModal, setShowModal, setMovie, Popularf
             </div>
             </div>
             
-            <Modal showModal={showModal} setShowModal={setShowModal} Movie={Movie}/>
+            <Modal setMovie={setMovie} showModal={showModal} setShowModal={setShowModal} Movie={Movie}/>
 
     </div>
 )

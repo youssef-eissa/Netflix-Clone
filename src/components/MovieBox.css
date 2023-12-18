@@ -178,3 +178,30 @@
 .ToPage:hover{
     color: #E50914;
 }
+.similar{
+    position: relative;
+    height: 800px;
+    overflow: auto;
+}
+.similarTitle{
+    font-weight: 600;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 5px;
+    position: fixed;
+    top: 0;
+}
+
+.similarImgBox{
+    height: 200px;
+    position: relative;
+}
+.similarImgBoxShadow{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+background-color:rgba(0, 0, 0, 0.482);
+width: 0;
+height: 0;
+}
