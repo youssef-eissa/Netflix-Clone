@@ -36,14 +36,10 @@
     background-color: #000000b3 !important;
 }
 .MoviesContainer{
-    top: -200px;
+    top: -170px;
 }
 
-.HomeNavBar{
-    position: fixed;
-    background-color: #141414;
-    z-index: 400;
-}
+
 .loadMore{
     height: 400px;
 }
@@ -172,4 +168,13 @@
     left: 45%;
     transform: translateX(-50%) rotate(-35deg);
     font-size: 35px;
+}
+.ToPage{
+    color: white;
+    text-decoration: none;
+    font-family: 'Poppins';
+    transition: 0.3s;
+}
+.ToPage:hover{
+    color: #E50914;
 }

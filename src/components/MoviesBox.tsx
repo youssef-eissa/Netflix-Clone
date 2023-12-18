@@ -3,28 +3,28 @@ import Slider from "react-slick";
 import { DoubleRightOutlined } from "@ant-design/icons";
 import { DoubleLeftOutlined } from "@ant-design/icons";
 import { StyledButton } from "./StyledComponents/StyledButton";
-
-
 import './MovieBox.css'
 import React, { useCallback, useEffect, useRef } from "react";
-type TMovieBox={
-    movies: Page[] 
+type TMovieBox = {
+    Movie: singleMovie | null
+    movies: Page[]
     title: string
-    PopularfetchNextPage: () => void
+    fetchNextPage?: () => void
     setMovie: (movie: singleMovie | null) => void
     setShowModal: (showModal: boolean) => void
     showModal: boolean
+    series?:Page[]
 }
-function MoviesBox({ movies, title, PopularfetchNextPage,setMovie,setShowModal,showModal }: TMovieBox) {
+function MoviesBox({ movies, title, fetchNextPage,setMovie,setShowModal,series }: TMovieBox) {
 
     
    
     const BoxHover = useRef<any>([])
     const BoxToHover = useRef<any>([])
-    function SliderButton({arrow,onClick,className}:any) {
+    function SliderButton({arrow,onClick}:any) {
         return <div style={{cursor:'pointer'}} className="d-flex align-items-center justify-content-center" onClick={onClick} >{arrow}</div>
     }
-    const FlattenMoviesArray = movies?.flat()
+    const FlattenMoviesArray = movies?.flat()|| series?.flat()
     
 
     const settings = {
@@ -43,6 +43,7 @@ function MoviesBox({ movies, title, PopularfetchNextPage,setMovie,setShowModal,s
     const getMovie=useCallback((movie:singleMovie | null)=>{
         setMovie(movie)
         setShowModal(true)
+        
     },[setMovie,setShowModal])
 
     useEffect(() => {
@@ -112,10 +113,12 @@ return (
 
                         </div>
                     })}
-                        <div  className=" loadMore justify-content-center align-items-center d-flex" onClick={PopularfetchNextPage}>
+                        <div  className=" loadMore justify-content-center align-items-center d-flex" onClick={fetchNextPage}>
                             <StyledButton className="col-6 p-2">Load More</StyledButton>
                         </div>
                     </Slider>
+                    
+
                 </div>
             </div>
         </div>

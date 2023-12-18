@@ -1,0 +1,12 @@
+.HomeNavBar {
+    position: fixed;
+    background-color: #141414;
+    z-index: 400;
+}
+.ToPage{
+    transition: 0.3s;
+}
+
+.ToPage:hover{
+    color: #E50914 !important;
+}

@@ -14,6 +14,7 @@ import { getUser } from './fetches/FetchUsers'
 import { setToken,setUser } from './redux/userSlice'
 import { Toaster, toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import Loader from './Loader'
 
 type TUser = {
     token: string
@@ -47,7 +48,7 @@ function Signin() {
         
     })
 
-    const {mutate,isError}=useMutation({
+    const {mutate,isError,isPending}=useMutation({
         mutationFn: (data: user) => getUser(data.username, data.password),
         onSuccess: (data) => {
             dispatch(setToken(data.data.token))
@@ -71,7 +72,11 @@ function Signin() {
         if (token !== '') {
             navigate('/home')
         }
-    },[token])
+    }, [token])
+    if (isPending) {
+        return <Loader />
+        
+    }
     
     return (
         <div className='container-fluid p-0'>

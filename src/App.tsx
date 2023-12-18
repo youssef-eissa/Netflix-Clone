@@ -4,12 +4,15 @@ import Signin from "./components/Signin";
 import { useSelector } from 'react-redux'
 import Home from "./components/Home";
 import { useNavigate,useLocation } from 'react-router-dom'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPopularMovies, fetchTopRatedMovies, fetchUpcomingMovies,fetchPlayingMovies,fetchPopularSeries,fetchAirSeries,fetchOnTheAirSeries,fetchTopRatedSeries } from "./components/fetches/Movies";
-import { Page } from "./components/Types/app";
+import { Page, singleMovie } from "./components/Types/app";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Loader from "./components/Loader";
+import NavBar from "./components/NavBar";
+import MoviesPage from "./components/MoviesPage";
+import HomeFooter from "./components/HomeFooter";
 type TUser = {
     token: string
     user:any
@@ -18,6 +21,8 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const token = useSelector((state: TUser) => state.user.token)
+  const [Movie, setMovie] = useState<singleMovie | null>(null)
+  const [showModal, setShowModal] = useState<boolean>(false)
 
   useEffect(() => {
     if (token === '') {
@@ -43,12 +48,13 @@ function App() {
       return data.pages.map((page) => page.data.results)
     },
     staleTime: 0,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    enabled: token !== ''
     
     
   })
 
-    const { data: TopRatedMovies,isSuccess:TopRatedMoviesSuccess,fetchNextPage:fetchTopRatedNextPage } = useInfiniteQuery({
+    const { data: TopRatedMovies,fetchNextPage:fetchTopRatedNextPage } = useInfiniteQuery({
     queryKey: ['TopRatedMovies'],
     queryFn: fetchTopRatedMovies,
     getNextPageParam: (lastPage, pages) => {
@@ -61,10 +67,12 @@ function App() {
       return data.pages.map((page) => page.data.results)
       },
       staleTime: 0,
-    refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+    enabled: token !== ''
+    
     })
   
-  const { data: UpcomingMovies,isSuccess:UpcomingMoviesSuccess,fetchNextPage:fetchUpcomingNextPage,isFetching:UpcomingMoviesFetching } = useInfiniteQuery({
+  const { data: UpcomingMovies,fetchNextPage:fetchUpcomingNextPage,isFetching:UpcomingMoviesFetching } = useInfiniteQuery({
     queryKey: ['UpcomingMovies'],
     queryFn: fetchUpcomingMovies,
     getNextPageParam: (lastPage, pages) => {
@@ -77,11 +85,13 @@ function App() {
       return data.pages.map((page) => page.data.results)
     },
     staleTime: 0,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    enabled: token !== ''
+
     
 
   })
-  const { data: PlyingMovies,isSuccess:PlayingMoviesSuccess,fetchNextPage:fetchPlayingNextPage ,isFetching:PlayingMoviesFetching} = useInfiniteQuery({
+  const { data: PlyingMovies,fetchNextPage:fetchPlayingNextPage ,isFetching:PlayingMoviesFetching} = useInfiniteQuery({
     queryKey: ['PlayingMovies'],
     queryFn: fetchPlayingMovies,
     getNextPageParam: (lastPage, pages) => {
@@ -94,11 +104,13 @@ function App() {
       return data.pages.map((page) => page.data.results)
     },
     staleTime: 0,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    enabled: token !== ''
+
     
 
   })
-  const { data: PopularSeries,fetchNextPage:fetchPopularSeriesNextPage,isFetching:PopularSeriesFetching } = useInfiniteQuery({
+  const { data: PopularSeries,fetchNextPage:fetchPopularSeriesNextPage,isFetching:PopularSeriesFetching,isSuccess:PopularSeriesSuccess } = useInfiniteQuery({
     queryKey: ['PopularSeries'],
     queryFn: fetchPopularSeries,
     getNextPageParam: (lastPage, pages) => {
@@ -111,7 +123,9 @@ function App() {
       return data.pages.map((page) => page.data.results)
     },
     staleTime: 0,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    enabled: token !== ''
+
     
 
   })
@@ -128,7 +142,8 @@ function App() {
       return data.pages.map((page) => page.data.results)
     },
     staleTime: 0,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    enabled: token !== ''
     
 
   })
@@ -145,7 +160,9 @@ function App() {
       return data.pages.map((page) => page.data.results)
     },
     staleTime: 0,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    enabled: token !== ''
+
     
 
   })
@@ -162,7 +179,9 @@ function App() {
       return data.pages.map((page) => page.data.results)
     },
     staleTime: 0,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    enabled: token !== ''
+
     
 
   })
@@ -173,9 +192,7 @@ function App() {
       </div>
     )
   }
-  useEffect(()  =>  {
-    
-  }, [OnTheAirSeriesFetching, TopRatedSeriesFetching, AirSeriesFetching, PopularSeriesFetching, PlayingMoviesFetching, UpcomingMoviesFetching])
+  
   
 
 if (OnTheAirSeriesFetching||TopRatedSeriesFetching||AirSeriesFetching||PopularSeriesFetching||PlayingMoviesFetching||UpcomingMoviesFetching) {
@@ -185,14 +202,78 @@ if (OnTheAirSeriesFetching||TopRatedSeriesFetching||AirSeriesFetching||PopularSe
       <Loading />
     </div>
   )
-    } 
+    }
   return (
     <div>
+      {token!=='' && <NavBar/>}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signin" element={<Signin />} />
-        {token !== '' && <Route path="/home" element={<Home popularMoviesSuccess={popularMoviesSuccess} PopularfetchNextPage={PopularfetchNextPage} popularMovies={popularMovies as Page[]} TopRatedMovies={TopRatedMovies as Page[]} TopRatedMoviesSuccess={TopRatedMoviesSuccess} fetchTopRatedNextPage={fetchTopRatedNextPage} UpcomingMovies={UpcomingMovies as Page[]} UpcomingMoviesSuccess={UpcomingMoviesSuccess} fetchUpcomingNextPage={fetchUpcomingNextPage} playingMovies={PlyingMovies as Page[]} playingMoviesSuccess={PlayingMoviesSuccess} fetchPlayingNextPage={fetchPlayingNextPage} popularSeries={PopularSeries as Page[]} fetchPopularSeries={fetchPopularSeriesNextPage} AirSeries={AirSeries as Page[] } fetchAirSeries={fetchAirSeriesNextPage} OnTheAirSeries={OnTheAirSeries as Page[]} fetchOnTheAirSeries={fetchOnTheAirSeriesNextPage} TopRatedSeries={TopRatedSeries as Page[]} fetchTopRatedSeries={fetchTopRatedSeriesNextPage} /> } />}
+        {token !== '' && <>
+          <Route path="/home" element={<Home
+            LargeVideo={popularMovies as Page[]}
+            Movie={Movie}
+            setMovie={setMovie}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            popularMoviesSuccess={popularMoviesSuccess}
+            PopularfetchNextPage={PopularfetchNextPage}
+            popularMovies={popularMovies as Page[]}
+            TopRatedMovies={TopRatedMovies as Page[]}
+            fetchTopRatedNextPage={fetchTopRatedNextPage}
+            UpcomingMovies={UpcomingMovies as Page[]}
+            fetchUpcomingNextPage={fetchUpcomingNextPage}
+            playingMovies={PlyingMovies as Page[]}
+            fetchPlayingNextPage={fetchPlayingNextPage}
+            popularSeries={PopularSeries as Page[]}
+            fetchPopularSeries={fetchPopularSeriesNextPage}
+            AirSeries={AirSeries as Page[]}
+            fetchAirSeries={fetchAirSeriesNextPage}
+            OnTheAirSeries={OnTheAirSeries as Page[]}
+            fetchOnTheAirSeries={fetchOnTheAirSeriesNextPage}
+            TopRatedSeries={TopRatedSeries as Page[]}
+            fetchTopRatedSeries={fetchTopRatedSeriesNextPage}
+          />}
+          />
+            
+          <Route path="/films" element={<MoviesPage
+            popularMovies={popularMovies as Page[]}
+            Movie={Movie}
+            setMovie={setMovie}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            PopularfetchNextPage={PopularfetchNextPage}
+            Success={popularMoviesSuccess}
+            TopRatedMovies={TopRatedMovies as Page[]}
+            LargeVideo={UpcomingMovies as Page[]}
+            fetchTopRatedNextPage={fetchTopRatedNextPage}
+            UpcomingMovies={UpcomingMovies as Page[]}
+            fetchUpcomingNextPage={fetchUpcomingNextPage}
+            playingMovies={PlyingMovies as Page[]}
+            fetchPlayingNextPage={fetchPlayingNextPage}
+          />} />
+
+            <Route path="/series" element={<MoviesPage
+            LargeVideo={AirSeries as Page[]}
+            Success={PopularSeriesSuccess}
+
+            popularSeries={PopularSeries as Page[]}
+            AirSeries={AirSeries as Page[]}
+            OnTheAirSeries={OnTheAirSeries as Page[]}
+            TopRatedSeries={TopRatedSeries as Page[]}
+            Movie={Movie}
+            setMovie={setMovie}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            
+
+          />} />
+        </>
+        
+        }
       </Routes>
+
+      {token !== '' && <HomeFooter />}
       <ReactQueryDevtools position='bottom' initialIsOpen={false} />
     </div>
   );
