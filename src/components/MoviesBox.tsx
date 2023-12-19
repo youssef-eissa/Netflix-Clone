@@ -5,18 +5,20 @@ import { DoubleLeftOutlined } from "@ant-design/icons";
 import { StyledButton } from "./StyledComponents/StyledButton";
 import './MovieBox.css'
 import React, { useCallback, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { setTheMovie } from './redux/Movie'
+import { TMovie } from "./Types/app";
 type TMovieBox = {
-    Movie: singleMovie | null
     movies: Page[]
     title: string
     fetchNextPage?: () => void
-    setMovie: (movie: singleMovie | null) => void
     setShowModal: (showModal: boolean) => void
     showModal: boolean
     series?:Page[]
 }
-function MoviesBox({ movies, title, fetchNextPage,setMovie,setShowModal,series }: TMovieBox) {
-
+function MoviesBox({ movies, title, fetchNextPage,setShowModal,series }: TMovieBox) {
+    const movie = useSelector((state:{movie:TMovie}) => state.movie.movie)
+    const dispatch=useDispatch()
     const BoxHover: React.MutableRefObject<HTMLDivElement[]> = useRef([])
     const BoxToHover = useRef<any>([])
     function SliderButton({arrow,onClick}:any) {
@@ -39,10 +41,11 @@ function MoviesBox({ movies, title, fetchNextPage,setMovie,setShowModal,series }
     };
 
     const getMovie=useCallback((movie:singleMovie | null)=>{
-        setMovie(movie)
-        setShowModal(true)
         
-    },[setMovie,setShowModal])
+        setShowModal(true)
+        dispatch(setTheMovie(movie))
+        
+    }, [ setShowModal, dispatch])
 
     useEffect(() => {
         const current = BoxHover.current

@@ -1,7 +1,7 @@
 import HomeVideo from "./HomeVideo"
 import MoviesBox from "./MoviesBox"
 import './MovieBox.css'
-import { Page,singleMovie } from "./Types/app"
+import { Page } from "./Types/app"
 import Modal from "./Modal"
 
 
@@ -9,9 +9,7 @@ import Modal from "./Modal"
 
 type IHome = {
     showModal: boolean
-    setMovie: (movie: singleMovie | null) => void
     setShowModal: (showModal: boolean) => void
-    Movie: singleMovie | null
     popularMovies: Page[]
     TopRatedMovies: Page[]
     UpcomingMovies: Page[]
@@ -33,7 +31,7 @@ type IHome = {
     LargeVideo:Page[]
 
 }
-function Home({ popularMovies, popularMoviesSuccess, PopularfetchNextPage, TopRatedMovies, fetchTopRatedNextPage, UpcomingMovies, fetchUpcomingNextPage, playingMovies, fetchPlayingNextPage, popularSeries, fetchPopularSeries, AirSeries, fetchAirSeries, OnTheAirSeries, fetchOnTheAirSeries, TopRatedSeries, fetchTopRatedSeries,showModal ,setMovie,setShowModal,Movie,LargeVideo}: IHome) {
+function Home({ popularMovies, popularMoviesSuccess, PopularfetchNextPage, TopRatedMovies, fetchTopRatedNextPage, UpcomingMovies, fetchUpcomingNextPage, playingMovies, fetchPlayingNextPage, popularSeries, fetchPopularSeries, AirSeries, fetchAirSeries, OnTheAirSeries, fetchOnTheAirSeries, TopRatedSeries, fetchTopRatedSeries,showModal ,setShowModal,LargeVideo}: IHome) {
 
 
     return (
@@ -43,24 +41,24 @@ function Home({ popularMovies, popularMoviesSuccess, PopularfetchNextPage, TopRa
                     
                     <HomeVideo Success={popularMoviesSuccess} Movies={LargeVideo as Page[]} />
                     <div className="col-12 p-0 position-relative MoviesContainer">
-                        <MoviesBox Movie={Movie} showModal={showModal} setShowModal={setShowModal} setMovie={setMovie} title="Playing Now Movies" movies={playingMovies as Page[]} fetchNextPage={fetchPlayingNextPage} />
+                        <MoviesBox showModal={showModal} setShowModal={setShowModal}  title="Playing Now Movies" movies={playingMovies as Page[]} fetchNextPage={fetchPlayingNextPage} />
 
-                        <MoviesBox Movie={Movie} showModal={showModal} setShowModal={setShowModal} setMovie={setMovie} title="Popular Movies" movies={popularMovies as Page[]} fetchNextPage={PopularfetchNextPage} />
+                        <MoviesBox showModal={showModal} setShowModal={setShowModal} title="Popular Movies" movies={popularMovies as Page[]} fetchNextPage={PopularfetchNextPage} />
 
-                        <MoviesBox Movie={Movie} showModal={showModal} setShowModal={setShowModal} setMovie={setMovie} title="Top Rated Movies" movies={TopRatedMovies as Page[]} fetchNextPage={fetchTopRatedNextPage} />
+                        <MoviesBox showModal={showModal} setShowModal={setShowModal}  title="Top Rated Movies" movies={TopRatedMovies as Page[]} fetchNextPage={fetchTopRatedNextPage} />
 
-                        <MoviesBox Movie={Movie} showModal={showModal} setShowModal={setShowModal} setMovie={setMovie} title="Upcoming Movies" movies={UpcomingMovies as Page[]} fetchNextPage={fetchUpcomingNextPage} />
+                        <MoviesBox showModal={showModal} setShowModal={setShowModal}  title="Upcoming Movies" movies={UpcomingMovies as Page[]} fetchNextPage={fetchUpcomingNextPage} />
 
-                        <MoviesBox Movie={Movie} showModal={showModal} setShowModal={setShowModal} setMovie={setMovie} title="Popular Series" movies={popularSeries as Page[]} fetchNextPage={fetchPopularSeries} />
+                        <MoviesBox showModal={showModal} setShowModal={setShowModal}  title="Popular Series" movies={popularSeries as Page[]} fetchNextPage={fetchPopularSeries} />
 
-                        <MoviesBox Movie={Movie} showModal={showModal} setShowModal={setShowModal} setMovie={setMovie} title="Airing Series" movies={AirSeries as Page[]} fetchNextPage={fetchAirSeries} />
+                        <MoviesBox showModal={showModal} setShowModal={setShowModal}  title="Airing Series" movies={AirSeries as Page[]} fetchNextPage={fetchAirSeries} />
 
-                        <MoviesBox Movie={Movie} showModal={showModal} setShowModal={setShowModal} setMovie={setMovie} title="On The Air Series" movies={OnTheAirSeries as Page[]} fetchNextPage={fetchOnTheAirSeries} />
+                        <MoviesBox showModal={showModal} setShowModal={setShowModal}  title="On The Air Series" movies={OnTheAirSeries as Page[]} fetchNextPage={fetchOnTheAirSeries} />
 
-                        <MoviesBox Movie={Movie} showModal={showModal} setShowModal={setShowModal} setMovie={setMovie} title="Top Rated Series" movies={TopRatedSeries as Page[]} fetchNextPage={fetchTopRatedSeries} />
+                        <MoviesBox showModal={showModal} setShowModal={setShowModal} title="Top Rated Series" movies={TopRatedSeries as Page[]} fetchNextPage={fetchTopRatedSeries} />
 
                     </div>
-                    <Modal setMovie={setMovie} showModal={showModal} setShowModal={setShowModal} Movie={Movie}/>
+                    <Modal showModal={showModal} setShowModal={setShowModal} />
 
                 </div>
             </div>

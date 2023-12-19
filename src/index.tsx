@@ -23,6 +23,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { movieReducer } from './components/redux/Movie';
 
 
 const client = new QueryClient();
@@ -35,7 +36,8 @@ const persistConfig = {
 }
 
 const reducer = combineReducers({
-  user:userReducer
+  user: userReducer,
+  movie: movieReducer
 })
 const PersistReducer = persistReducer(persistConfig, reducer);
 const store = configureStore({

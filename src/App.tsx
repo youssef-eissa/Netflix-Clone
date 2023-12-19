@@ -7,7 +7,7 @@ import { useNavigate,useLocation } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPopularMovies, fetchTopRatedMovies, fetchUpcomingMovies,fetchPlayingMovies,fetchPopularSeries,fetchAirSeries,fetchOnTheAirSeries,fetchTopRatedSeries } from "./components/fetches/Movies";
-import { Page, singleMovie } from "./components/Types/app";
+import { Page } from "./components/Types/app";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Loader from "./components/Loader";
 import NavBar from "./components/NavBar";
@@ -21,7 +21,8 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const token = useSelector((state: TUser) => state.user.token)
-  const [Movie, setMovie] = useState<singleMovie | null>(null)
+  
+  
   const [showModal, setShowModal] = useState<boolean>(false)
 
   useEffect(() => {
@@ -212,8 +213,6 @@ if (OnTheAirSeriesFetching||TopRatedSeriesFetching||AirSeriesFetching||PopularSe
         {token !== '' && <>
           <Route path="/home" element={<Home
             LargeVideo={popularMovies as Page[]}
-            Movie={Movie}
-            setMovie={setMovie}
             showModal={showModal}
             setShowModal={setShowModal}
             popularMoviesSuccess={popularMoviesSuccess}
@@ -238,8 +237,6 @@ if (OnTheAirSeriesFetching||TopRatedSeriesFetching||AirSeriesFetching||PopularSe
             
           <Route path="/films" element={<MoviesPage
             popularMovies={popularMovies as Page[]}
-            Movie={Movie}
-            setMovie={setMovie}
             showModal={showModal}
             setShowModal={setShowModal}
             PopularfetchNextPage={PopularfetchNextPage}
@@ -261,8 +258,6 @@ if (OnTheAirSeriesFetching||TopRatedSeriesFetching||AirSeriesFetching||PopularSe
             AirSeries={AirSeries as Page[]}
             OnTheAirSeries={OnTheAirSeries as Page[]}
             TopRatedSeries={TopRatedSeries as Page[]}
-            Movie={Movie}
-            setMovie={setMovie}
             showModal={showModal}
             setShowModal={setShowModal}
             
