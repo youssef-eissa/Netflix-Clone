@@ -119,7 +119,7 @@ function Signin() {
                         {errors.password && touched.password && <p className='text-danger m-0'>{errors.password}</p>}
                         </div>
 
-                    <StyledButton type='submit' className='col-3 p-2 '>Signin</StyledButton>
+                    <StyledButton type='submit' className='col-3 p-2 '>Sign in</StyledButton>
                     </form>
                     <div><Toaster
                     position="top-left"
