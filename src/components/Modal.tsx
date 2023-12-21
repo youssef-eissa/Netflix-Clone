@@ -180,9 +180,9 @@ const handleMute = useCallback(() => {
     }, [mute])
     
 
-     const fetchSimilar = () => {
+        const fetchSimilar = () => {
     return axios.get(`https://api.themoviedb.org/3/${checkMovieOrSeries}/${videoID}/similar?api_key=${key}`);
-     }
+    }
     const { data: similarMovies } = useQuery({
         queryKey: ['similarMovies',videoID],
         queryFn: fetchSimilar,

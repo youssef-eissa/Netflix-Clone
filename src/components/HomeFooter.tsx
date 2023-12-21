@@ -7,7 +7,7 @@ function HomeFooter() {
             <div className='row d-flex justify-content-center'>
                 <div className='col-8 d-flex HomeFooter flex-column p-0'>
                         <div className='col-12 d-flex justify-content-between icons '>
-                            <div className='col-5 d-flex'> <Link className='col-2' to=''>
+                            <div className='col-md-5 col-12 d-flex'> <Link className='col-2' to=''>
                             <FacebookFilled className='col-12 icon'/>
 
                             </Link>
@@ -23,8 +23,8 @@ function HomeFooter() {
                                 <YoutubeFilled className='col-12 icon' />
                             </Link></div>
                         </div>
-                    <div className='col-12 d-flex'>
-                        <div className='col-3 d-flex flex-column'>
+                    <div className='col-12 d-flex flex-md-row flex-column'>
+                        <div className='col-md-3 col-12 d-flex flex-column'>
                         <div className='col-12 d-flex flex-column footerLinks mt-2'>
                             <Link className='col-12 link' to=''>Audio Description</Link>
                             <Link className='col-12 link my-3' to=''>Investor Relations</Link>
@@ -33,17 +33,17 @@ function HomeFooter() {
                         <div className='col-5 py-1 text-center mt-4 serviceCode'>Service Code</div>
                         <span className='col-12 mt-4'>© 1996-{new Date().getFullYear()} Netflix, Inc.</span>
                         </div>
-                        <div className='col-3 d-flex flex-column footerLinks mt-2'>
+                        <div className='col-md-3 col-12 d-flex flex-column footerLinks mt-2'>
                             <Link className='col-12 link' to=''>Help Center</Link>
                             <Link className='col-12 link my-3' to=''>Jobs</Link>
                             <Link className='col-12 link' to=''>Cookies Preferences</Link>
                         </div>
-                        <div className='col-3 d-flex flex-column footerLinks mt-2'>
+                        <div className='col-md-3  col-12 d-flex flex-column footerLinks mt-2'>
                             <Link className='col-12 link' to=''>Gift Cards</Link>
                             <Link className='col-12 link my-3' to=''>Terms of Use</Link>
                             <Link className='col-12 link' to=''>Corporate Information</Link>
                         </div>
-                        <div className='col-3 d-flex flex-column footerLinks mt-2'>
+                        <div className='col-md-3 col-12 d-flex flex-column footerLinks mt-2'>
                             <Link className='col-12 link' to=''>Media Center</Link>
                             <Link className='col-12 link my-3' to=''>Privacy</Link>
                             <Link className='col-12 link' to=''>Contact Us</Link>

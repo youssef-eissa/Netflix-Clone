@@ -4,6 +4,31 @@ body {
 }
 .headerSection{
     height: 800px;
+    position: relative;
+    overflow: hidden;
+}
+.bottomCircle{
+position: absolute;
+width: 200%;
+height: 100%;
+bottom: -730px;
+left: 50%;
+transform: translateX(-50%);
+background: linear-gradient(to bottom, red 0%, purple 7%);
+z-index: 20;
+border-radius: 50%;
+}
+
+.bottomCircle::before{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 5px;
+    left: 0;
+    z-index: -1;
+    content: '';
+    background: radial-gradient(50% 500% at 50% -420%, rgba(64, 97, 231, 0.4) 80%, rgba(0, 0, 0, 0.1) 100%),black;
+    border-radius:50%;
 }
 
 .logo img{
@@ -51,4 +76,17 @@ body {
 .landPageLink{
     color: rgba(255, 255, 255, 0.7);
     text-align: center;
+}
+
+@media (max-width:768px){
+.homeSubscription h1 {
+        font-size: 30px;
+    }
+    .collapseRow p{
+        font-size: 15px;
+    }
+    .bottomCircle{
+        width: 250%;
+        bottom: -750px;
+    }
 }

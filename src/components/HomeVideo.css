@@ -37,5 +37,11 @@
     100%{
         width: 100%;
     }
+}
+
+@media (max-width: 768px) {
+    .fill{
+        font-size: 100px;
+    }
     
 }

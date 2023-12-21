@@ -5,9 +5,8 @@ import { DoubleLeftOutlined } from "@ant-design/icons";
 import { StyledButton } from "./StyledComponents/StyledButton";
 import './MovieBox.css'
 import React, { useCallback, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setTheMovie } from './redux/Movie'
-import { TMovie } from "./Types/app";
 type TMovieBox = {
     movies: Page[]
     title: string
@@ -17,7 +16,6 @@ type TMovieBox = {
     series?:Page[]
 }
 function MoviesBox({ movies, title, fetchNextPage,setShowModal,series }: TMovieBox) {
-    const movie = useSelector((state:{movie:TMovie}) => state.movie.movie)
     const dispatch=useDispatch()
     const BoxHover: React.MutableRefObject<HTMLDivElement[]> = useRef([])
     const BoxToHover = useRef<any>([])
@@ -37,7 +35,17 @@ function MoviesBox({ movies, title, fetchNextPage,setShowModal,series }: TMovieB
         slidesToShow: 6,
         slidesToScroll: 6,
         nextArrow: <SliderButton  arrow={<DoubleRightOutlined  className="slider-button next   d-flex align-items-center justify-content-center" style={{ color: 'white' ,fontSize:50}} />}/>,
-        prevArrow: <SliderButton  arrow={<DoubleLeftOutlined className="slider-button left d-flex align-items-center justify-content-center" style={{ color: 'white',fontSize:50}} />} />
+        prevArrow: <SliderButton arrow={<DoubleLeftOutlined className="slider-button left d-flex align-items-center justify-content-center" style={{ color: 'white', fontSize: 50 }} />} />,
+        responsive: [
+            
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
     };
 
     const getMovie=useCallback((movie:singleMovie | null)=>{

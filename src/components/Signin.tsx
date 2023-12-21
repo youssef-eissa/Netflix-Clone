@@ -79,17 +79,17 @@ function Signin() {
     }
     
     return (
-        <div className='container-fluid p-0'>
+        <div className='container-fluid p-0 overflow-hidden'>
             <div className='row'>
                 <div className='col-12 signin position-relative min-vh-100 d-flex justify-content-center align-items-center flex-column'>
-                    <div className='col-12  logo position-absolute top-0 z-3'>
+                    <div className='col-12 logo position-absolute top-0 z-3'>
                         <img src={logo} alt="logo" className='img-fluid' />
                     </div>
                         <div className='col-12 position-absolute top-0 start-0 h-100 w-100 z-1'>
                         <img className='w-100 h-100 img-fluid ' src={banner} alt="banner" />
                     </div>
                     <Overlay ></Overlay>
-                    <form onSubmit={handleSubmitForm} className='col-4 rounded d-flex flex-column justify-content-center align-items-center z-3'>
+                    <form onSubmit={handleSubmitForm} className='col-md-4 col-10 rounded d-flex flex-column justify-content-center align-items-center z-3'>
                         <legend className='mb-5 col-12 text-center'>Sign in</legend>
                         <div className='col-10  mb-5'>
                             <StyledInput

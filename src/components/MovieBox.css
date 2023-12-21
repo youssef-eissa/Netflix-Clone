@@ -3,15 +3,7 @@
     overflow: visible !important;
     position: relative;
 }
-.slider-button{
-    background-color: #0000005e !important;
-    transition: 0.3s;
-    cursor: pointer !important;
-    position: absolute;
-    height: 100%;
-    width: 90px;
-    z-index: 200;
-}
+
 .next{
     right: 0px;
 }
@@ -28,7 +20,8 @@
     width: 100px;
     top: 50%;
     transform: translateY(-50%);
-    
+    z-index: 200;
+    border-radius:10px ;
 }
 
 
@@ -204,4 +197,17 @@ transform: translate(-50%,-50%);
 background-color:rgba(0, 0, 0, 0.482);
 width: 0;
 height: 0;
+}
+
+@media (max-width: 768px) {
+    .ToHoverTheBox {
+            position: relative;
+            transform: rotate(0) !important;
+        }
+        .BoxHover  {
+        width: 100% !important;
+        }
+        .slider-button{
+            height: 30% !important;
+        }
 }

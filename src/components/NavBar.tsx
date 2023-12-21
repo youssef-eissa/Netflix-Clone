@@ -19,7 +19,7 @@ function NavBar() {
                         <div className="col-2 ps-3">
                             <img alt="logo" src={logo} className="img-fluid " />
                         </div>
-                        <div className="col-8 d-flex">
+                        <div className="col-8 justify-content-center justify-content-md-start d-flex">
                             <Link style={{color:location.pathname==='/home'?'#E50914':'white'}} reloadDocument className="col-auto ToPage" to='/home'>Home</Link>
                             <Link style={{color:location.pathname==='/films'?'#E50914':'white'}} reloadDocument className="col-auto mx-3 ToPage" to='/films'>Films</Link>
                             <Link style={{color:location.pathname==='/series'?'#E50914':'white'}} reloadDocument className="col-auto ToPage" to='/series'>Series</Link>
