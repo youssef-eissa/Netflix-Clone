@@ -92,7 +92,7 @@
     height: 900px;
     z-index: 20002;
     background-color: #0000005e;
-   
+    overflow: auto;
 }
 .ModalImg{
     height: 350px;
@@ -174,7 +174,10 @@
 .similar{
     position: relative;
     height: 800px;
+}
+.similarCon{
     overflow: auto;
+
 }
 .similarTitle{
     font-weight: 600;
@@ -208,6 +211,30 @@ height: 0;
         width: 100% !important;
         }
         .slider-button{
-            height: 30% !important;
+        height: 30% !important;
+        }
+        .similar {
+        height: 300px;
+        margin-top: 50px !important;
+        margin-bottom: 200px;
+        background-color: rgba(0, 0, 0, 0.658);
+        }
+        .MovieBoxCon{
+        top: 100px !important;
+        }
+        .ModalImg{
+            height: 200px;
+        }
+        .modalCon{
+            height: 1000px;
+        }
+        .MovieInfoModal p{
+            font-size: 12px;
+        }
+        .similarTitle{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
 }

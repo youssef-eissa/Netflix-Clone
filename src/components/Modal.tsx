@@ -165,6 +165,7 @@ return axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${key}&lang
         staleTime: 0,
         refetchOnWindowFocus: false
     });
+    
 
 const handleMute = useCallback(() => {
     setMute(!mute)
@@ -227,13 +228,14 @@ const handleMute = useCallback(() => {
     const setMovieInSimilarBox=useCallback((movie:singleMovie)=>{
         
         dispatch(setTheMovie(movie))
-    },[dispatch])
+    }, [dispatch])
+    
 
     return (
         <div  className='container-fluid'>
             <div  className='row'>
-                <div ref={MovieConRef} onClick={CloseModal} className={`p-0 col-12 modalCon ${showModal ? 'd-flex' : 'd-none'}  justify-content-around  `}>
-                    <motion.div ref={ref} animate={animate} className='col-6 d-flex MovieBoxCon flex-column'>
+                <div ref={MovieConRef} onClick={CloseModal} className={`p-0  col-12 modalCon ${showModal ? 'd-flex' : 'd-none'}  justify-content-md-around align-items-center flex-md-row flex-column `}>
+                    <motion.div ref={ref} animate={animate} className='col-md-6 col-12 d-flex MovieBoxCon flex-column'>
                         <div ref={ref} className='col-12 ModalImg rounded'>
                             <img alt={movie?.title} src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`} className="img-fluid w-100 h-100 " />
                             <div className='ModalImgShadow'></div>
@@ -241,7 +243,7 @@ const handleMute = useCallback(() => {
                         </div>
                         <div className='col-12 d-flex flex-column align-items-center MovieInfoModal p-2'>
                             <p className='col-12'>{movie?.overview}</p>
-                            <div className='col-12 d-flex justify-content-center'>
+                            <div className='col-12 d-flex justify-content-center flex-wrap '>
                                 <div className='col-auto rate d-flex align-items-center'>{MovieRate}% Match</div>
                                 <div className='col-auto mx-5 d-flex justify-content-center'>
                                     {movie?.adults?<div className='col-12 rounded text-center adult'>+18</div>:<div className='col-12 px-3 py-1 text-center adult rounded'>+13</div>}
@@ -256,7 +258,7 @@ const handleMute = useCallback(() => {
                                 </div>
                                 <div className='col-auto ms-5 d-flex align-items-center '>{movie?.release_date || movie?.first_air_date }</div>
                             </div>
-                            <div ref={videoModalRef} className='col-6 d-flex modalVideoCon mt-3 rounded overflow-hidden '>
+                            {movieVideo!==undefined && <div ref={videoModalRef} className='col-6 d-flex modalVideoCon mt-3 rounded overflow-hidden '>
                                 <div onClick={handleMute} className='col-auto d-flex align-items-center justify-content-center VideoModalControlVolume p-2'>
                                     <SoundOutlined />
                                     <div  className={`col-auto barVolumeControl ${VolumeBarMuteDisplay}`}>|</div>
@@ -282,19 +284,21 @@ const handleMute = useCallback(() => {
                                         }
                                     }}
                                 />
-                            </div>
+                            </div>}
                         </div>
                     </motion.div>
-                    <motion.div animate={animate2} className='col-3 d-flex similar flex-column'>
+                    <motion.div animate={animate2} className='col-md-3 col-10 d-flex similar flex-md-column flex-row'>
                         <h1 className='col-12 similarTitle'>Similar </h1>
-                        {similarMovies?.map((movie: singleMovie,i:number) => {
-                            return <div ref={e=>SimilarBoxRef.current[i] = e!} key={movie?.id} className='col-12 similarImgBox mb-2 d-flex flex-column'>
+                        <div className='col-12 similarCon d-flex flex-md-column flex-row'>
+                            {similarMovies?.map((movie: singleMovie,i:number) => {
+                            return <div ref={e=>SimilarBoxRef.current[i] = e!} key={movie?.id} className='col-md-12 col-12 mt-md-0 mt-5 similarImgBox mb-2 d-flex flex-column'>
                                 <img alt={movie?.title} src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`} className="img-fluid w-100 h-100 " />
-                                <div ref={e => SimilarBoxRefOverlay.current[i] = e!} className='d-flex  similarImgBoxShadow justify-content-center align-items-center overflow-hidden'>
+                                <div ref={e => SimilarBoxRefOverlay.current[i] = e!} className='d-flex similarImgBoxShadow justify-content-center align-items-center overflow-hidden'>
                                     <StyledButton ref={e=>SimilarBoxButtonRef.current[i] = e!} onClick={()=>setMovieInSimilarBox(movie)} className='col-4 p-2 '>Show Info</StyledButton>
                                 </div>
                             </div>
                         })}
+                        </div>
                     </motion.div>
                 </div>
             </div>
